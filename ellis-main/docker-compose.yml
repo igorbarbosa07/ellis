@@ -1,0 +1,19 @@
+
+services:
+  api:
+    # Constrói a imagem a partir do Dockerfile no diretório atual.
+    build: .
+    # Mapeia a porta 8000 do contêiner para a porta 8000 do seu computador.
+    container_name: ellis
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual (no seu computador) para o diretório /app (no contêiner).
+    # Isso permite que as alterações no código-fonte sejam refletidas
+    # automaticamente pelo uvicorn com --reload.
+    # O banco de dados SQLite (escola.db) também será criado e persistido no seu diretório local.
+    volumes:
+      - .:/app
+    # O comando para iniciar a aplicação é herdado do Dockerfile:
+    # CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+
